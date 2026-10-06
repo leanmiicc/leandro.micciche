@@ -44,8 +44,11 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--fg)
 <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between text-sm font-medium" aria-label="Principal">
 <a href="#top" class="font-bold flex items-baseline gap-2" aria-label="Leandro Micciche, QA Automation, inicio"><span class="ac font-mono" aria-hidden="true">&lt;/&gt;</span><span>Leandro Micciche</span><span class="mut font-medium hidden md:inline">· QA Automation</span></a>
 <div class="hidden sm:flex gap-5 mut"><a href="#impacto">Impacto</a><a href="#experiencia">Experiencia</a><a href="#stack">Stack</a><a href="#proyectos">Proyectos</a><a href="#educacion">Educación</a><a href="#contacto">Contacto</a></div>
-<button id="theme" class="btn !py-1 !px-3" aria-label="Cambiar tema claro/oscuro">◐ Tema</button>
-</nav></header>
+<div class="flex items-center gap-2"><button id="theme" class="btn !py-1 !px-3" aria-label="Cambiar tema claro/oscuro">◐ Tema</button>
+<button id="mbtn" class="btn !py-1 !px-3 sm:hidden" aria-expanded="false" aria-controls="mmenu">☰ Menú</button></div>
+</nav>
+<div id="mmenu" hidden class="sm:hidden border-t px-4 py-2 grid grid-cols-2 gap-1 text-sm font-medium" style="border-color:var(--bd)">
+<a class="py-2" href="#impacto">Impacto</a><a class="py-2" href="#experiencia">Experiencia</a><a class="py-2" href="#stack">Stack</a><a class="py-2" href="#proyectos">Proyectos</a><a class="py-2" href="#educacion">Educación</a><a class="py-2" href="#contacto">Contacto</a></div></header>
 
 <main id="main" class="max-w-5xl mx-auto px-4">
 <section id="top" class="py-16 sm:py-24">
@@ -56,7 +59,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--fg)
 <div class="mt-7 flex flex-wrap gap-3 noprint">
 <a class="btn p" href="Leandro%20Micciche%20-%20cv.pdf" download="Leandro Micciche - CV.pdf">⬇ Descargar CV (PDF)</a>
 <a class="btn" href="https://www.linkedin.com/in/leandro-micciche-48304456" target="_blank" rel="noopener">LinkedIn</a>
-<a class="btn" href="tel:+5491162521920">📞 Contacto directo</a>
+<a class="btn" href="https://wa.me/5491162521920" target="_blank" rel="noopener">💬 WhatsApp</a>
 <a class="btn" href="mailto:leandro.micciche@gmail.com">✉ Email</a>
 <a class="btn" href="https://github.com/leanmiicc" target="_blank" rel="noopener">GitHub</a>
 </div></section>
@@ -115,8 +118,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--fg)
 <p class="mut mt-2">Respondo rápido. Buenos Aires, Argentina.</p>
 <div class="mt-5 flex flex-wrap justify-center gap-3">
 <a class="btn p" href="mailto:leandro.micciche@gmail.com">✉ leandro.micciche@gmail.com</a>
-<a class="btn" href="tel:+5491162521920">📞 (011) 15-6252-1920</a>
-<a class="btn" href="https://wa.me/5491162521920" target="_blank" rel="noopener">💬 WhatsApp</a>
+<a class="btn" href="https://wa.me/5491162521920" target="_blank" rel="noopener">💬 WhatsApp · (011) 15-6252-1920</a>
 <a class="btn" href="https://www.linkedin.com/in/leandro-micciche-48304456" target="_blank" rel="noopener">LinkedIn</a>
 </div></div></section>
 </main>
@@ -150,6 +152,9 @@ function upd(){const h=document.documentElement,m=h.scrollHeight-h.clientHeight;
 addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
 ['wheel','touchstart','keydown'].forEach(e=>addEventListener(e,()=>{if(forced!==null){forced=null;upd()}},{passive:true}));
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const i=ids.indexOf(a.getAttribute('href').slice(1));if(i>=0){forced=i;upd()}}));
+const mb=document.getElementById('mbtn'),mm=document.getElementById('mmenu');
+mb.onclick=()=>{const o=mm.hidden;mm.hidden=!o;mb.setAttribute('aria-expanded',o)};
+mm.onclick=e=>{if(e.target.tagName==='A'){mm.hidden=true;mb.setAttribute('aria-expanded','false')}};
 document.getElementById('yr').textContent=new Date().getFullYear();
 document.getElementById('theme').onclick=()=>{const r=document.documentElement,d=matchMedia('(prefers-color-scheme:dark)').matches;
 const cur=r.dataset.theme||(d?'dark':'light');r.dataset.theme=cur==='dark'?'light':'dark'};
